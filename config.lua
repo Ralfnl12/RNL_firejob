@@ -13,10 +13,7 @@ Config.EnableESXIdentity          = true -- Enable if you're using esx_identity.
 Config.EnableESXOptionalneeds     = false -- Enable if you're using esx_optionalneeds
 Config.EnableLicenses             = false -- Enable if you're using esx_license.
 
-Config.EnableHandcuffTimer        = true -- Enable handcuff timer? will unrestrain player after the time ends.
-Config.HandcuffTimer              = 10 * 60000 -- 10 minutes.
-
-Config.EnableJobBlip              = false -- Enable blips for people on duty, requires esx_society.
+Config.EnableJobBlip              = true -- Enable blips for people on duty, requires esx_society.
 Config.EnableCustomPeds           = false -- Enable custom peds in cloak room? See Config.CustomPeds below to customize peds.
 
 Config.EnableESXService           = false -- Enable esx service?
@@ -28,33 +25,30 @@ Config.OxInventory                = ESX.GetConfig().OxInventory
 
 Config.FireStations = {
 
-	Brandweer = {
+	LSPD = {
 
 		Blip = {
-			Coords  = vector3(425.1, -979.5, 30.7),
-			Sprite  = 60,
+			Coords  = vector3(1199.18, -1477.51, 160.87),
+			Sprite  = 436,
 			Display = 4,
 			Scale   = 1.2,
-			Colour  = 29
+			Colour  = 1
 		},
 
 		Cloakrooms = {
-			vector3(452.6, -992.8, 30.6)
+			vector3(1227.1549, -1492.7612, 34.6923)
 		},
 
 		Armories = {
-			vector3(451.7, -980.1, 30.6)
+			vector3(1211.38, -1486.19, 34.759531402588)
 		},
 
 		Vehicles = {
 			{
-				Spawner = vector3(454.6, -1017.4, 28.4),
+				Spawner = vector3(1218.04, -1478.38, 34.753531402588),
 				InsideShop = vector3(228.5, -993.5, -99.5),
 				SpawnPoints = {
-					{coords = vector3(438.4, -1018.3, 27.7), heading = 90.0, radius = 6.0},
-					{coords = vector3(441.0, -1024.2, 28.3), heading = 90.0, radius = 6.0},
-					{coords = vector3(453.5, -1022.2, 28.0), heading = 90.0, radius = 6.0},
-					{coords = vector3(450.9, -1016.5, 28.1), heading = 90.0, radius = 6.0}
+					{coords = vector3(1213.29, -1472.71, 34.759531402588), heading = 357.2, radius = 6.0}
 				}
 			},
 
@@ -239,31 +233,6 @@ Config.Uniforms = {
 			tshirt_1 = 35,  tshirt_2 = 0,
 			torso_1 = 48,   torso_2 = 0,
 			decals_1 = 7,   decals_2 = 1,
-			arms = 44,
-			pants_1 = 34,   pants_2 = 0,
-			shoes_1 = 27,   shoes_2 = 0,
-			helmet_1 = -1,  helmet_2 = 0,
-			chain_1 = 0,    chain_2 = 0,
-			ears_1 = 2,     ears_2 = 0
-		}
-	},
-
-	lieutenant = {
-		male = {
-			tshirt_1 = 58,  tshirt_2 = 0,
-			torso_1 = 55,   torso_2 = 0,
-			decals_1 = 8,   decals_2 = 2,
-			arms = 41,
-			pants_1 = 25,   pants_2 = 0,
-			shoes_1 = 25,   shoes_2 = 0,
-			helmet_1 = -1,  helmet_2 = 0,
-			chain_1 = 0,    chain_2 = 0,
-			ears_1 = 2,     ears_2 = 0
-		},
-		female = {
-			tshirt_1 = 35,  tshirt_2 = 0,
-			torso_1 = 48,   torso_2 = 0,
-			decals_1 = 7,   decals_2 = 2,
 			arms = 44,
 			pants_1 = 34,   pants_2 = 0,
 			shoes_1 = 27,   shoes_2 = 0,
