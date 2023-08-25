@@ -1,7 +1,7 @@
 # RNL_firejob
 A WIP esx Firejob for fivem 
 
-<a href='https://discord.esx-framework.org/'>Discord</a>
+<a href='https://discord.gg/EsQHpVxthB'>Discord</a>
 
 ### Requirements
 * Auto mode
