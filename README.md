@@ -1,33 +1,27 @@
 # RNL_firejob
 A WIP esx Firejob for fivem 
 
-Discord: https://discord.gg/EsQHpVxthB
+<a href='https://discord.esx-framework.org/'>Discord</a>
 
-**Requirements:**
+### Requirements
+* Auto mode
+  * [esx_billing](https://github.com/esx-framework/esx_billing)
+  * [esx_vehicleshop](https://github.com/esx-framework/esx_vehicleshop)
 
-**Auto mode**
+* Player management (boss actions and armory with buyable weapons)
+  * [esx_addoninventory](https://github.com/esx-framework/esx_addoninventory)
+  * [esx_datastore](https://github.com/esx-framework/esx_datastore)
+  * [esx_society](https://github.com/esx-framework/esx_society)
 
-esx_billing
-esx_vehicleshop
+* ESX Identity Support
+  * [esx_identity](https://github.com/esx-framework/esx_core/tree/main/%5Bcore%5D/esx_identity)
 
-**Player management (boss actions and armory with buyable weapons)**
+* ESX License Support
+  * [esx_license](https://github.com/esx-framework/esx_license)
 
-esx_addoninventory
-esx_datastore
-esx_society
+* ESX Service Support
+  * [esx_service](https://github.com/esx-framework/esx_service)
 
-**ESX Identity Support**
+* ESX Status Support
+  * [esx_status](https://github.com/esx-framework/esx_status)
 
-esx_identity
-
-**ESX License Support**
-
-esx_license
-
-**ESX Service Support**
-
-esx_service
-
-**ESX Status Support**
-
-esx_status
