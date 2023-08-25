@@ -28,4 +28,4 @@ A WIP esx Firejob for fivem
 ### How to install
 * dowload this repo
 * insert this file in you're [esx] folder
-* add ``` ensure esx_policejob ``` to the server.cfg
+* add ``` ensure RNL_firejob ``` to the server.cfg
