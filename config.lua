@@ -28,7 +28,7 @@ Config.OxInventory                = ESX.GetConfig().OxInventory
 
 Config.FireStations = {
 
-	LSFD = {
+	Brandweer = {
 
 		Blip = {
 			Coords  = vector3(425.1, -979.5, 30.7),
@@ -87,83 +87,67 @@ Config.FireStations = {
 }
 
 Config.AuthorizedWeapons = {
-	recruit = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 10000},
+	aspirant = {
+		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
 		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 1500},
-		{weapon = 'WEAPON_FLASHLIGHT', price = 80}
-	},
-
-	officer = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 10000},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 50000},
-		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 500},
+		{weapon = 'WEAPON_STUNGUN', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	},
 
-	sergeant = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 10000},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 50000},
-		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 70000},
+	Brandwacht = {
+		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
+		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 0},
 		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 500},
+		{weapon = 'WEAPON_STUNGUN', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	},
 
-	lieutenant = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 10000},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 50000},
-		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 70000},
+	brandmeester = {
+		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
+		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 0},
+		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 0},
 		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 500},
+		{weapon = 'WEAPON_STUNGUN', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	},
 
+	
 	boss = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 10000},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 50000},
-		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 70000},
+		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
+		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 0},
+		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 0},
 		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 500},
+		{weapon = 'WEAPON_STUNGUN', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	}
 }
 
 Config.AuthorizedVehicles = {
 	car = {
-		recruit = {},
+		aspirant = {},
 
-		officer = {
-			{model = 'police3', price = 20000}
+		Brandwacht = {
+			{model = 'police3', price = 0}
 		},
 
-		sergeant = {
-			{model = 'policet', price = 18500},
-			{model = 'policeb', price = 30500}
+		brandmeester = {
+			{model = 'policet', price = 0},
+			{model = 'policeb', price = 0}
 		},
 
-		lieutenant = {
-			{model = 'riot', price = 70000},
-			{model = 'fbi2', price = 60000}
-		},
 
 		boss = {}
 	},
 
 	helicopter = {
-		recruit = {},
+		aspirant = {},
 
-		officer = {},
+		Brandwacht = {},
 
-		sergeant = {},
-
-		lieutenant = {
-			{model = 'polmav', props = {modLivery = 0}, price = 200000}
-		},
+		brandmeester = {},
 
 		boss = {
-			{model = 'polmav', props = {modLivery = 0}, price = 100000}
+			{model = 'polmav', props = {modLivery = 0}, price = 0}
 		}
 	}
 }
@@ -174,11 +158,11 @@ Config.CustomPeds = {
 		{label = TranslateCap('s_m_y_cop_01'), maleModel = 's_m_y_cop_01', femaleModel = 's_f_y_cop_01'}
 	},
 
-	recruit = {},
+	aspirant = {},
 
-	officer = {},
+	Brandwacht = {},
 
-	sergeant = {},
+	brandmeester = {},
 
 	lieutenant = {},
 
@@ -189,7 +173,7 @@ Config.CustomPeds = {
 
 -- CHECK SKINCHANGER CLIENT MAIN.LUA for matching elements
 Config.Uniforms = {
-	recruit = {
+	aspirant = {
 		male = {
 			tshirt_1 = 59,  tshirt_2 = 1,
 			torso_1 = 55,   torso_2 = 0,
@@ -214,7 +198,7 @@ Config.Uniforms = {
 		}
 	},
 
-	officer = {
+	Brandwacht = {
 		male = {
 			tshirt_1 = 58,  tshirt_2 = 0,
 			torso_1 = 55,   torso_2 = 0,
@@ -239,7 +223,7 @@ Config.Uniforms = {
 		}
 	},
 
-	sergeant = {
+	brandmeester = {
 		male = {
 			tshirt_1 = 58,  tshirt_2 = 0,
 			torso_1 = 55,   torso_2 = 0,
