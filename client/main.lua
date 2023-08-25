@@ -264,21 +264,10 @@ function OpenfireActionsMenu()
 		if data.current.value == 'citizen_interaction' then
 			local elements2 = {
 				{unselectable = true, icon = "fas fa-user", title = element.title},
-				{icon = "fas fa-idkyet", title = TranslateCap('id_card'), value = 'identity_card'},
-				{icon = "fas fa-idkyet", title = TranslateCap('search'), value = 'search'},
-				{icon = "fas fa-idkyet", title = TranslateCap('handcuff'), value = 'handcuff'},
 				{icon = "fas fa-idkyet", title = TranslateCap('drag'), value = 'drag'},
 				{icon = "fas fa-idkyet", title = TranslateCap('put_in_vehicle'), value = 'put_in_vehicle'},
 				{icon = "fas fa-idkyet", title = TranslateCap('out_the_vehicle'), value = 'out_the_vehicle'},
-				{icon = "fas fa-idkyet", title = TranslateCap('fine'), value = 'fine'},
-				{icon = "fas fa-idkyet", title = TranslateCap('unpaid_bills'), value = 'unpaid_bills'}
 			}
-
-			if Config.EnableLicenses then
-				elements2[#elements2+1] = {
-					icon = "fas fa-scroll",
-					title = TranslateCap('license_check'),
-					value = 'license'
 				}
 			end
 
@@ -288,24 +277,14 @@ function OpenfireActionsMenu()
 					local data2 = {current = element2}
 					local action = data2.current.value
 
-					if action == 'identity_card' then
-						OpenIdentityCardMenu(closestPlayer)
-					elseif action == 'search' then
-						OpenBodySearchMenu(closestPlayer)
-					elseif action == 'handcuff' then
-						TriggerServerEvent('RNL_firejob:handcuff', GetPlayerServerId(closestPlayer))
-					elseif action == 'drag' then
+					
+					if action == 'drag' then
 						TriggerServerEvent('RNL_firejob:drag', GetPlayerServerId(closestPlayer))
 					elseif action == 'put_in_vehicle' then
 						TriggerServerEvent('RNL_firejob:putInVehicle', GetPlayerServerId(closestPlayer))
 					elseif action == 'out_the_vehicle' then
 						TriggerServerEvent('RNL_firejob:OutVehicle', GetPlayerServerId(closestPlayer))
-					elseif action == 'fine' then
-						OpenFineMenu(closestPlayer)
-					elseif action == 'license' then
-						ShowPlayerLicense(closestPlayer)
-					elseif action == 'unpaid_bills' then
-						OpenUnpaidBillsMenu(closestPlayer)
+				
 					end
 				else
 					ESX.ShowNotification(TranslateCap('no_players_nearby'))
@@ -323,7 +302,6 @@ function OpenfireActionsMenu()
 			if DoesEntityExist(vehicle) then
 				elements3[#elements3+1] = {icon = "fas fa-car", title = TranslateCap('vehicle_info'), value = 'vehicle_infos'}
 				elements3[#elements3+1] = {icon = "fas fa-car", title = TranslateCap('pick_lock'), value = 'hijack_vehicle'}
-				elements3[#elements3+1] = {icon = "fas fa-car", title = TranslateCap('impound'), value = 'impound'}
 			end
 
 			elements3[#elements3+1] = {
@@ -354,35 +332,6 @@ function OpenfireActionsMenu()
 							SetVehicleDoorsLockedForAllPlayers(vehicle, false)
 							ESX.ShowNotification(TranslateCap('vehicle_unlocked'))
 						end
-					elseif action == 'impound' then
-						if currentTask.busy then
-							return
-						end
-
-						ESX.ShowHelpNotification(TranslateCap('impound_prompt'))
-						TaskStartScenarioInPlace(playerPed, 'CODE_HUMAN_MEDIC_TEND_TO_DEAD', 0, true)
-
-						currentTask.busy = true
-						currentTask.task = ESX.SetTimeout(10000, function()
-							ClearPedTasks(playerPed)
-							ImpoundVehicle(vehicle)
-							Wait(100)
-						end)
-
-						CreateThread(function()
-							while currentTask.busy do
-								Wait(1000)
-
-								vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 3.0, 0, 71)
-								if not DoesEntityExist(vehicle) and currentTask.busy then
-									ESX.ShowNotification(TranslateCap('impound_canceled_moved'))
-									ESX.ClearTimeout(currentTask.task)
-									ClearPedTasks(playerPed)
-									currentTask.busy = false
-									break
-								end
-							end
-						end)
 					end
 				else
 					ESX.ShowNotification(TranslateCap('no_vehicles_nearby'))
@@ -395,9 +344,6 @@ function OpenfireActionsMenu()
 				{unselectable = true, icon = "fas fa-object", title = element.title},
 				{icon = "fas fa-cone", title = TranslateCap('cone'), model = 'prop_roadcone02a'},
 				{icon = "fas fa-cone", title = TranslateCap('barrier'), model = 'prop_barrier_work05'},
-				{icon = "fas fa-cone", title = TranslateCap('spikestrips'), model = 'p_ld_stinger_s'},
-				{icon = "fas fa-cone", title = TranslateCap('box'), model = 'prop_boxpile_07d'},
-				{icon = "fas fa-cone", title = TranslateCap('cash'), model = 'hei_prop_cash_crate_half_full'}
 			}
 
 			ESX.OpenContext("right", elements4, function(menu4,element4)
@@ -524,36 +470,6 @@ function OpenFineMenu(player)
 	end)
 end
 
-function OpenFineCategoryMenu(player, category)
-	ESX.TriggerServerCallback('RNL_firejob:getFineList', function(fines)
-		local elements = {
-			{unselectable = true, icon = "fas fa-scroll", title = TranslateCap('fine')}
-		}
-
-		for k,fine in ipairs(fines) do
-			elements[#elements+1] = {
-				icon = "fas fa-scroll",
-				title     = ('%s <span style="color:green;">%s</span>'):format(fine.label, TranslateCap('armory_item', ESX.Math.GroupDigits(fine.amount))),
-				value     = fine.id,
-				amount    = fine.amount,
-				fineLabel = fine.label
-			}
-		end
-
-		ESX.OpenContext("right", elements, function(menu,element)
-			local data = {current = element}
-			if Config.EnablePlayerManagement then
-				TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(player), 'society_fire', TranslateCap('fine_total', data.current.fineLabel), data.current.amount)
-			else
-				TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(player), '', TranslateCap('fine_total', data.current.fineLabel), data.current.amount)
-			end
-
-			ESX.SetTimeout(300, function()
-				OpenFineCategoryMenu(player, category)
-			end)
-		end)
-	end, category)
-end
 
 function LookupVehicle(elementF)
 	local elements = {
@@ -617,25 +533,6 @@ function ShowPlayerLicense(player)
 				ShowPlayerLicense(player)
 			end)
 		end)
-	end, GetPlayerServerId(player))
-end
-
-function OpenUnpaidBillsMenu(player)
-	local elements = {
-		{unselectable = true, icon = "fas fa-scroll", title = TranslateCap('unpaid_bills')}
-	}
-
-	ESX.TriggerServerCallback('esx_billing:getTargetBills', function(bills)
-		for k,bill in ipairs(bills) do
-			elements[#elements+1] = {
-				unselectable = true,
-				icon = "fas fa-scroll",
-				title = ('%s - <span style="color:red;">%s</span>'):format(bill.label, TranslateCap('armory_item', ESX.Math.GroupDigits(bill.amount))),
-				billId = bill.id
-			}
-		end
-
-		ESX.OpenContext("right", elements, nil, nil)
 	end, GetPlayerServerId(player))
 end
 
@@ -1137,69 +1034,6 @@ AddEventHandler('RNL_firejob:OutVehicle', function()
 	end
 end)
 
--- Handcuff
-CreateThread(function()
-	local DisableControlAction = DisableControlAction
-	local IsEntityPlayingAnim = IsEntityPlayingAnim
-	while true do
-		local Sleep = 1000
-
-		if isHandcuffed then
-			Sleep = 0
-			DisableControlAction(0, 1, true) -- Disable pan
-			DisableControlAction(0, 2, true) -- Disable tilt
-			DisableControlAction(0, 24, true) -- Attack
-			DisableControlAction(0, 257, true) -- Attack 2
-			DisableControlAction(0, 25, true) -- Aim
-			DisableControlAction(0, 263, true) -- Melee Attack 1
-			DisableControlAction(0, 32, true) -- W
-			DisableControlAction(0, 34, true) -- A
-			DisableControlAction(0, 31, true) -- S
-			DisableControlAction(0, 30, true) -- D
-
-			DisableControlAction(0, 45, true) -- Reload
-			DisableControlAction(0, 22, true) -- Jump
-			DisableControlAction(0, 44, true) -- Cover
-			DisableControlAction(0, 37, true) -- Select Weapon
-			DisableControlAction(0, 23, true) -- Also 'enter'?
-
-			DisableControlAction(0, 288,  true) -- Disable phone
-			DisableControlAction(0, 289, true) -- Inventory
-			DisableControlAction(0, 170, true) -- Animations
-			DisableControlAction(0, 167, true) -- Job
-
-			DisableControlAction(0, 0, true) -- Disable changing view
-			DisableControlAction(0, 26, true) -- Disable looking behind
-			DisableControlAction(0, 73, true) -- Disable clearing animation
-			DisableControlAction(2, 199, true) -- Disable pause screen
-
-			DisableControlAction(0, 59, true) -- Disable steering in vehicle
-			DisableControlAction(0, 71, true) -- Disable driving forward in vehicle
-			DisableControlAction(0, 72, true) -- Disable reversing in vehicle
-
-			DisableControlAction(2, 36, true) -- Disable going stealth
-
-			DisableControlAction(0, 47, true)  -- Disable weapon
-			DisableControlAction(0, 264, true) -- Disable melee
-			DisableControlAction(0, 257, true) -- Disable melee
-			DisableControlAction(0, 140, true) -- Disable melee
-			DisableControlAction(0, 141, true) -- Disable melee
-			DisableControlAction(0, 142, true) -- Disable melee
-			DisableControlAction(0, 143, true) -- Disable melee
-			DisableControlAction(0, 75, true)  -- Disable exit vehicle
-			DisableControlAction(27, 75, true) -- Disable exit vehicle
-
-			if IsEntityPlayingAnim(ESX.PlayerData.ped, 'mp_arresting', 'idle', 3) ~= 1 then
-				ESX.Streaming.RequestAnimDict('mp_arresting', function()
-					TaskPlayAnim(ESX.PlayerData.ped, 'mp_arresting', 'idle', 8.0, -8, -1, 49, 0.0, false, false, false)
-					RemoveAnimDict('mp_arresting')
-				end)
-			end
-		end
-	Wait(Sleep)
-	end
-end)
-
 -- Create blips
 CreateThread(function()
 	for k,v in pairs(Config.fireStations) do
@@ -1535,30 +1369,7 @@ AddEventHandler('onResourceStop', function(resource)
 	end
 end)
 
--- handcuff timer, unrestrain the player after an certain amount of time
-function StartHandcuffTimer()
-	if Config.EnableHandcuffTimer and handcuffTimer.active then
-		ESX.ClearTimeout(handcuffTimer.task)
-	end
 
-	handcuffTimer.active = true
-
-	handcuffTimer.task = ESX.SetTimeout(Config.HandcuffTimer, function()
-		ESX.ShowNotification(TranslateCap('unrestrained_timer'))
-		TriggerEvent('RNL_firejob:unrestrain')
-		handcuffTimer.active = false
-	end)
-end
-
--- TODO
---   - return to garage if owned
---   - message owner that his vehicle has been impounded
-function ImpoundVehicle(vehicle)
-	--local vehicleName = GetLabelText(GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)))
-	ESX.Game.DeleteVehicle(vehicle)
-	ESX.ShowNotification(TranslateCap('impound_successful'))
-	currentTask.busy = false
-end
 
 if ESX.PlayerLoaded and ESX.PlayerData.job == 'fire' then
 	SetTimeout(1000, function()
