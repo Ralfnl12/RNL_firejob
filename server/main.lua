@@ -12,17 +12,6 @@ TriggerEvent('esx_society:registerSociety', 'fire', TranslateCap('society_fire')
 
 
 
-RegisterNetEvent('RNL_firejob:handcuff')
-AddEventHandler('RNL_firejob:handcuff', function(target)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	if xPlayer.job.name == 'fire' then
-		TriggerClientEvent('RNL_firejob:handcuff', target)
-	else
-		print(('[^3WARNING^7] Player ^5%s^7 Attempted To Exploit Handcuffs!'):format(xPlayer.source))
-	end
-end)
-
 RegisterNetEvent('RNL_firejob:drag')
 AddEventHandler('RNL_firejob:drag', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
