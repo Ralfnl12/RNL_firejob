@@ -10,66 +10,7 @@ end
 TriggerEvent('esx_phone:registerNumber', 'fire', TranslateCap('alert_fire'), true, true)
 TriggerEvent('esx_society:registerSociety', 'fire', TranslateCap('society_fire'), 'society_fire', 'society_fire', 'society_fire', {type = 'public'})
 
-RegisterNetEvent('RNL_firejob:confiscatePlayerItem')
-AddEventHandler('RNL_firejob:confiscatePlayerItem', function(target, itemType, itemName, amount)
-	local source = source
-	local sourceXPlayer = ESX.GetPlayerFromId(source)
-	local targetXPlayer = ESX.GetPlayerFromId(target)
 
-	if sourceXPlayer.job.name ~= 'fire' then
-		print(('[^3WARNING^7] Player ^5%s^7 Attempted To Exploit The Confuscation System!'):format(sourceXPlayer.source))
-		return
-	end
-
-	if itemType == 'item_standard' then
-		local targetItem = targetXPlayer.getInventoryItem(itemName)
-		local sourceItem = sourceXPlayer.getInventoryItem(itemName)
-
-		-- does the target player have enough in their inventory?
-		if targetItem.count > 0 and targetItem.count <= amount then
-
-			-- can the player carry the said amount of x item?
-			if sourceXPlayer.canCarryItem(itemName, sourceItem.count) then
-				targetXPlayer.removeInventoryItem(itemName, amount)
-				sourceXPlayer.addInventoryItem   (itemName, amount)
-				sourceXPlayer.showNotification(TranslateCap('you_confiscated', amount, sourceItem.label, targetXPlayer.name))
-				targetXPlayer.showNotification(TranslateCap('got_confiscated', amount, sourceItem.label, sourceXPlayer.name))
-			else
-				sourceXPlayer.showNotification(TranslateCap('quantity_invalid'))
-			end
-		else
-			sourceXPlayer.showNotification(TranslateCap('quantity_invalid'))
-		end
-
-	elseif itemType == 'item_account' then
-		local targetAccount = targetXPlayer.getAccount(itemName)
-
-		-- does the target player have enough money?
-		if targetAccount.money >= amount then
-			targetXPlayer.removeAccountMoney(itemName, amount, "Confiscated")
-			sourceXPlayer.addAccountMoney   (itemName, amount, "Confiscated")
-
-			sourceXPlayer.showNotification(TranslateCap('you_confiscated_account', amount, itemName, targetXPlayer.name))
-			targetXPlayer.showNotification(TranslateCap('got_confiscated_account', amount, itemName, sourceXPlayer.name))
-		else
-			sourceXPlayer.showNotification(TranslateCap('quantity_invalid'))
-		end
-
-	elseif itemType == 'item_weapon' then
-		if amount == nil then amount = 0 end
-
-		-- does the target player have weapon?
-		if targetXPlayer.hasWeapon(itemName) then
-			targetXPlayer.removeWeapon(itemName)
-			sourceXPlayer.addWeapon   (itemName, amount)
-
-			sourceXPlayer.showNotification(TranslateCap('you_confiscated_weapon', ESX.GetWeaponLabel(itemName), targetXPlayer.name, amount))
-			targetXPlayer.showNotification(TranslateCap('got_confiscated_weapon', ESX.GetWeaponLabel(itemName), amount, sourceXPlayer.name))
-		else
-			sourceXPlayer.showNotification(TranslateCap('quantity_invalid'))
-		end
-	end
-end)
 
 RegisterNetEvent('RNL_firejob:handcuff')
 AddEventHandler('RNL_firejob:handcuff', function(target)
