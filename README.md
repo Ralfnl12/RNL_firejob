@@ -25,3 +25,7 @@ A WIP esx Firejob for fivem
 * ESX Status Support
   * [esx_status](https://github.com/esx-framework/esx_status)
 
+### How to install
+* dowload this repo
+* insert this file in you [esx] folder
+* add 
