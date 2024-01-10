@@ -82,43 +82,32 @@ Config.FireStations = {
 
 Config.AuthorizedWeapons = {
 	aspirant = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
-		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 0},
+		{weapon = 'WEAPON_FIREEXTINGUISHER', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	},
 
 	Brandwacht = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 0},
-		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 0},
+		{weapon = 'WEAPON_FIREEXTINGUISHER', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	},
 
 	brandmeester = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 0},
-		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 0},
-		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 0},
+		{weapon = 'WEAPON_FIREEXTINGUISHER', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	},
 
 	
 	boss = {
-		{weapon = 'WEAPON_APPISTOL', components = {0, 0, 1000, 4000, nil}, price = 0},
-		{weapon = 'WEAPON_ADVANCEDRIFLE', components = {0, 6000, 1000, 4000, 8000, nil}, price = 0},
-		{weapon = 'WEAPON_PUMPSHOTGUN', components = {2000, 6000, nil}, price = 0},
-		{weapon = 'WEAPON_NIGHTSTICK', price = 0},
-		{weapon = 'WEAPON_STUNGUN', price = 0},
+		{weapon = 'WEAPON_FIREEXTINGUISHER', price = 0},
 		{weapon = 'WEAPON_FLASHLIGHT', price = 0}
 	}
 }
 
 Config.AuthorizedVehicles = {
 	car = {
-		aspirant = {},
+		aspirant = {
+			
+		},
 
 		Brandwacht = {
 			{model = 'police3', price = 0}
@@ -130,7 +119,9 @@ Config.AuthorizedVehicles = {
 		},
 
 
-		boss = {}
+		boss = {
+			
+		}
 	},
 
 	helicopter = {
